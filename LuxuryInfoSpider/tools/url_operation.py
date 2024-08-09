@@ -67,7 +67,7 @@ def build_all_url():
             "start": start
         }
         url = build_url(args_dict)
-        print(url)
+        # print(url)
         url_list.append(url)
         args_dict_list.append(args_dict)
     return url_list, args_dict_list

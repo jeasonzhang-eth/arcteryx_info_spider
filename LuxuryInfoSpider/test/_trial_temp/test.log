@@ -1,0 +1,2 @@
+2024-03-18 21:27:27+0000 [-] Log opened.
+2024-03-18 21:27:28+0000 [-] /home/ubuntu/miniconda3/envs/LuxuryInfoSpider/lib/python3.11/site-packages/urllib3/connectionpool.py:1099: urllib3.exceptions.InsecureRequestWarning: Unverified HTTPS request is being made to host '180.183.153.152'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings

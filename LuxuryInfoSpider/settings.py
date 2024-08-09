@@ -6,6 +6,8 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import os
+from datetime import datetime
 
 BOT_NAME = "LuxuryInfoSpider"
 
@@ -43,15 +45,32 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-SPIDER_MIDDLEWARES = {
-   "LuxuryInfoSpider.middlewares.LuxuryInfoSpiderSpiderMiddleware": 543,
-}
+# SPIDER_MIDDLEWARES = {
+#    "LuxuryInfoSpider.middlewares.LuxuryInfoSpiderSpiderMiddleware": 543,
+# }
+# DOWNLOAD_HANDLERS = {
+#     "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+#     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+# }
+
+# PLAYWRIGHT_LAUNCH_OPTIONS = {
+#     "headless": True
+# }
+# PLAYWRIGHT_DEFAULT_NAVIGATION_TIMEOUT = (
+#     30 * 1000
+# )
+#
+# PLAYWRIGHT_BROWSER_TYPE = "chromium"
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   "LuxuryInfoSpider.middlewares.RandomUserAgentMiddleware": 543,
+   # "LuxuryInfoSpider.middlewares.RandomUserAgentMiddleware": 543,
    # "LuxuryInfoSpider.middlewares.RandomProxyMiddleware": 544,
+   # "LuxuryInfoSpider.middlewares.ErrorHandlingMiddleware": 545,
+   # 'scrapy.downloadermiddlewares.retry.RetryMiddleware': None
+   # "scrapy_cloudflare_middleware.middlewares.CloudFlareMiddleware": 560,
+   # "LuxuryInfoSpider.middlewares.DelayMiddleware": 545,
 }
 
 # Enable or disable extensions
@@ -93,6 +112,33 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 # Configure the Redis connection
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
+REDIS_HOST = "130.162.145.124"
+REDIS_PORT = 16379
 REDIS_DB = 0
+REDIS_PASSWORD = "Jeason52"
+MAX_RETRY_TIMES = 3
+RETRY_HTTP_CODES = [500, 502, 503, 504, 408, 429, 404, 403]
+RETRY_PRIORITY_ADJUST = -1
+
+DOWNLOAD_DELAY = 1
+RANDOMIZE_DOWNLOAD_DELAY = True
+
+# 文件及路径，log目录需要先建好
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+ROOT_PATH = os.path.join(CURRENT_PATH, os.pardir)
+LOG_PATH = os.path.join(ROOT_PATH, 'log')
+today = datetime.now()
+
+log_file_path = LOG_PATH + f"/scrapy_{today.year}_{today.month}_{today.day}.log"
+# 日志输出
+"""
+1. CRITICAL - 严重错误
+2. ERROR - 一般错误
+3. WARNING - 警告信息
+4. INFO - 一般信息
+5. DEBUG - 调试信息
+"""
+
+LOG_LEVEL = "INFO"
+# LOG_FILE = log_file_path
+# LOG_STDOUT = True
